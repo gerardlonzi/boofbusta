@@ -21,6 +21,8 @@ jobs:
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_REFRESH_SECRET: ${{ secrets.JWT_REFRESH_SECRET }}
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
       NODE_ENV: test
 
     strategy:
