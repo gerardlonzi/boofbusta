@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       },
     };
   } catch {
-    return { title: "Produit introuvable" };
+    return { title: "Product not found" };
   }
 }
 
@@ -110,7 +110,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <p className="text-zinc-600 dark:text-zinc-400">{product.description}</p>
           <div className="text-sm text-zinc-500">
             <p>SKU: {product.sku}</p>
-            <p>Stock: {product.stock > 0 ? `${product.stock} disponibles` : "Rupture"}</p>
+            <p>Stock: {product.stock > 0 ? `${product.stock} available` : "Out of stock"}</p>
             {product.brand && <p>Marque: {product.brand}</p>}
           </div>
           {product.tags.length > 0 && (
