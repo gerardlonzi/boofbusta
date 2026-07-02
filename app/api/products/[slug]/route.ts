@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { revalidateTag } from "next/cache";
 import { getProductBySlug, updateProduct, deleteProduct } from "@/services/product.service";
 import { requireAdmin } from "@/lib/auth/cookies";
 import { apiSuccess, handleApiError } from "@/lib/api-response";
@@ -30,6 +31,7 @@ export async function PATCH(
     const { productSchema } = await import("@/validations/product");
     const input = productSchema.partial().parse(body);
     const product = await updateProduct(existing.id, input);
+    revalidateTag("categories", { expire: 0 });
     return apiSuccess({ product });
   } catch (error) {
     return handleApiError(error);
@@ -46,6 +48,7 @@ export async function DELETE(
     const existing = await prisma.product.findUnique({ where: { slug } });
     if (!existing) throw new Error("Not found");
     await deleteProduct(existing.id);
+    revalidateTag("categories", { expire: 0 });
     return apiSuccess({ deleted: true });
   } catch (error) {
     return handleApiError(error);
