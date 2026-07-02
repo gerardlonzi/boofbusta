@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { slugify } from "@/lib/utils";
 import { AppError } from "@/lib/api-response";
+import { deleteImagesByUrls } from "@/lib/cloudinary";
 import type { ProductInput, ProductQuery } from "@/validations/product";
 
 function buildOrderBy(sort: ProductQuery["sort"]) {
@@ -84,7 +85,7 @@ export async function getProductBySlug(slug: string) {
       },
     },
   });
-  if (!product) throw new AppError("Produit introuvable", 404);
+  if (!product) throw new AppError("Product not found", 404);
   return product;
 }
 
@@ -93,7 +94,7 @@ export async function createProduct(input: ProductInput) {
   const existing = await prisma.product.findFirst({
     where: { OR: [{ slug }, { sku: input.sku }] },
   });
-  if (existing) throw new AppError("Slug ou SKU déjà existant", 409);
+  if (existing) throw new AppError("Slug or SKU already exists", 409);
 
   return prisma.product.create({
     data: { ...input, slug },
@@ -114,6 +115,13 @@ export async function updateProduct(id: string, input: Partial<ProductInput>) {
 }
 
 export async function deleteProduct(id: string) {
+  const product = await prisma.product.findUnique({ where: { id } });
+  if (!product) return null;
+
+  if (product.images.length > 0) {
+    await deleteImagesByUrls(product.images);
+  }
+
   return prisma.product.delete({ where: { id } });
 }
 

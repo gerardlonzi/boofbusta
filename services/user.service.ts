@@ -25,7 +25,7 @@ export async function updateAddress(
   input: Partial<AddressInput>
 ) {
   const address = await prisma.address.findFirst({ where: { id, userId } });
-  if (!address) throw new AppError("Adresse introuvable", 404);
+  if (!address) throw new AppError("Address not found", 404);
 
   if (input.isDefault) {
     await prisma.address.updateMany({
@@ -38,7 +38,7 @@ export async function updateAddress(
 
 export async function deleteAddress(id: string, userId: string) {
   const address = await prisma.address.findFirst({ where: { id, userId } });
-  if (!address) throw new AppError("Adresse introuvable", 404);
+  if (!address) throw new AppError("Address not found", 404);
   return prisma.address.delete({ where: { id } });
 }
 
@@ -91,7 +91,7 @@ export async function updateUserRole(id: string, role: "ADMIN" | "CUSTOMER") {
 
 export async function toggleUserActive(id: string) {
   const user = await prisma.user.findUnique({ where: { id } });
-  if (!user) throw new AppError("Utilisateur introuvable", 404);
+  if (!user) throw new AppError("User not found", 404);
   return prisma.user.update({
     where: { id },
     data: { isActive: !user.isActive },

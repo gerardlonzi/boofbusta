@@ -70,7 +70,7 @@ export async function addToCart(
 ) {
   const product = await prisma.product.findUnique({ where: { id: productId } });
   if (!product || product.status !== "ACTIVE") {
-    throw new AppError("Produit indisponible", 400);
+    throw new AppError("Product unavailable", 400);
   }
   if (product.stock < quantity) {
     throw new AppError("Stock insuffisant", 400);
@@ -102,7 +102,7 @@ export async function updateCartItem(
 ) {
   const cart = await getOrCreateCart(userId);
   const item = cart.items.find((i) => i.productId === productId);
-  if (!item) throw new AppError("Article introuvable dans le panier", 404);
+  if (!item) throw new AppError("Item not found in cart", 404);
 
   if (quantity === 0) {
     await prisma.cartItem.delete({ where: { id: item.id } });
@@ -122,7 +122,7 @@ export async function updateCartItem(
 export async function removeFromCart(userId: string, productId: string) {
   const cart = await getOrCreateCart(userId);
   const item = cart.items.find((i) => i.productId === productId);
-  if (!item) throw new AppError("Article introuvable", 404);
+  if (!item) throw new AppError("Item not found", 404);
   await prisma.cartItem.delete({ where: { id: item.id } });
   return getCart(userId);
 }

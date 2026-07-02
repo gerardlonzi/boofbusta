@@ -148,7 +148,7 @@ export async function confirmPayment(sessionId: string) {
     where: { stripeSessionId: sessionId },
     include: { user: true },
   });
-  if (!order) throw new AppError("Commande introuvable", 404);
+  if (!order) throw new AppError("Order not found", 404);
 
   await prisma.order.update({
     where: { id: order.id },
@@ -196,7 +196,7 @@ export async function getOrderById(orderId: string, userId?: string) {
       coupon: true,
     },
   });
-  if (!order) throw new AppError("Commande introuvable", 404);
+  if (!order) throw new AppError("Order not found", 404);
   if (userId && order.userId !== userId) {
     throw new AppError("Accès refusé", 403);
   }

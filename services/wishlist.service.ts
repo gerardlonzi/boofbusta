@@ -59,12 +59,12 @@ export async function getWishlist(userId: string) {
 export async function addToWishlist(userId: string, productId: string) {
   const product = await prisma.product.findUnique({ where: { id: productId } });
   if (!product || product.status !== "ACTIVE") {
-    throw new AppError("Produit indisponible", 400);
+    throw new AppError("Product unavailable", 400);
   }
 
   const wishlist = await getOrCreateWishlist(userId);
   const exists = wishlist.items.some((i) => i.productId === productId);
-  if (exists) throw new AppError("Produit déjà dans la wishlist", 409);
+  if (exists) throw new AppError("Product already in wishlist", 409);
 
   await prisma.wishlistItem.create({
     data: { wishlistId: wishlist.id, productId },
@@ -76,7 +76,7 @@ export async function addToWishlist(userId: string, productId: string) {
 export async function removeFromWishlist(userId: string, productId: string) {
   const wishlist = await getOrCreateWishlist(userId);
   const item = wishlist.items.find((i) => i.productId === productId);
-  if (!item) throw new AppError("Produit introuvable", 404);
+  if (!item) throw new AppError("Product not found", 404);
 
   await prisma.wishlistItem.delete({ where: { id: item.id } });
   return getOrCreateWishlist(userId);
