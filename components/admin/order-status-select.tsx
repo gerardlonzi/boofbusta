@@ -22,10 +22,10 @@ export function OrderStatusSelect({ orderId, currentStatus }: OrderStatusSelectP
       body: JSON.stringify({ orderId, action: "updateStatus", status }),
     });
     if (!res.ok) {
-      toast.error("Erreur lors de la mise à jour");
+      toast.error("Failed to update status");
       return;
     }
-    toast.success("Statut mis à jour");
+    toast.success("Status updated");
     router.refresh();
   }
 

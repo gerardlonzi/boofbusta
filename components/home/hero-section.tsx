@@ -4,7 +4,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 export function HeroSection() {
   return (
     <section className="hero-glow relative overflow-hidden px-4 py-20 sm:py-28">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzZDY2NGYiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggIGQ9Ik0zNiAzNGg0djRoLTR6bTAgMGg0djRoLTR6bTAgMGg0djRoLTR6bTAgMGg0djRoLTR6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-40" />
+      <div className="absolute inset-0 opacity-40" />
       <div className="relative mx-auto max-w-4xl text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-primary-light">
           <Sparkles className="h-3.5 w-3.5" />

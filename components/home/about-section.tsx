@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export function AboutSection() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
@@ -24,7 +26,13 @@ export function AboutSection() {
           </div>
         </div>
         <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary/20 via-surface to-accent/10">
-          <div className="absolute inset-0 flex items-center justify-center text-8xl opacity-30">🍄</div>
+<Image
+                  src="/ch4.jpg"
+                  alt="champignon pic"
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                />
         </div>
       </div>
 

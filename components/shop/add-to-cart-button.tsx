@@ -100,7 +100,7 @@ export function AddToCartButton({
 
       >
 
-        Voir le panier
+        See Cart 
 
       </Link>
 
@@ -166,7 +166,7 @@ export function AddToCartButton({
 
       >
 
-        {loading ? "Ajout..." : disabled ? "Rupture" : "Ajouter au panier"}
+        {loading ? "Adding..." : disabled ? "Out of stock" : "Add to cart"}
 
       </button>
 
@@ -200,7 +200,7 @@ export function AddToCartButton({
 
         <ShoppingBag className="h-5 w-5" />
 
-        {loading ? "Ajout..." : disabled ? "Rupture de stock" : "Ajouter au panier"}
+        {loading ? "Adding..." : disabled ? "Out of stock" : "Add to cart"}
 
       </button>
 
@@ -214,7 +214,7 @@ export function AddToCartButton({
 
         >
 
-          Voir le panier
+          See Cart
 
         </Link>
 

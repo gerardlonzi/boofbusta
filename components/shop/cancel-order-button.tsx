@@ -8,7 +8,7 @@ export function CancelOrderButton({ orderId }: { orderId: string }) {
   const router = useRouter();
 
   async function handleCancel() {
-    if (!confirm("Annuler cette commande ?")) return;
+    if (!confirm("Cancel this order?")) return;
     const res = await fetch("/api/orders", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -16,16 +16,16 @@ export function CancelOrderButton({ orderId }: { orderId: string }) {
     });
     const json = await res.json();
     if (!res.ok) {
-      toast.error(json.error?.message ?? "Erreur");
+      toast.error(json.error?.message ?? "Something went wrong");
       return;
     }
-    toast.success("Commande annulée");
+    toast.success("Order cancelled");
     router.refresh();
   }
 
   return (
     <Button variant="destructive" className="mt-4" onClick={handleCancel}>
-      Annuler la commande
+      Cancel order
     </Button>
   );
 }

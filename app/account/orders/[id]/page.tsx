@@ -35,10 +35,10 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
       <Link href={ROUTES.accountOrders} className="text-sm text-zinc-500 hover:underline">
-        ← Mes commandes
+        ← My Orders
       </Link>
       <div className="mt-4 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Commande #{order.orderNumber}</h1>
+        <h1 className="text-3xl font-bold">Order #{order.orderNumber}</h1>
         <Badge>{order.status}</Badge>
       </div>
 

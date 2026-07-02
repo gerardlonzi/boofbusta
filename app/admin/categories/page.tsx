@@ -26,8 +26,11 @@ export default async function AdminCategoriesPage() {
 
 
 
-  const categories = await getCategories();
+  console.log("✅ Admin OK");
 
+  const categories = await getCategories();
+  
+  console.log("✅ Categories:", categories);
 
 
   return (
@@ -36,7 +39,7 @@ export default async function AdminCategoriesPage() {
 
       <Link href={ROUTES.admin} className="text-sm text-zinc-500 hover:underline">← Dashboard</Link>
 
-      <h1 className="mb-8 mt-4 text-3xl font-bold">Gestion Catégories</h1>
+      <h1 className="mb-8 mt-4 text-3xl font-bold">Manage Categories</h1>
 
       <AdminCategoryManager categories={categories} />
 

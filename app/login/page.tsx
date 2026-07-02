@@ -32,13 +32,13 @@ export default function LoginPage() {
         body: JSON.stringify(data),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error?.message ?? "Erreur");
+      if (!res.ok) throw new Error(json.error?.message ?? "Something went wrong");
       await syncGuestDataOnLogin();
       toast.success("Connexion réussie");
       router.push(json.data.user.role === "ADMIN" ? ROUTES.admin : ROUTES.account);
       router.refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erreur");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }

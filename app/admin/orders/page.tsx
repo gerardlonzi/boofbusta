@@ -19,7 +19,7 @@ export default async function AdminOrdersPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <Link href={ROUTES.admin} className="text-sm text-zinc-500 hover:underline">← Dashboard</Link>
-      <h1 className="mb-8 mt-4 text-3xl font-bold">Gestion Commandes</h1>
+      <h1 className="mb-8 mt-4 text-3xl font-bold">Manage Orders</h1>
       <div className="space-y-4">
         {orders.map((order) => (
           <div key={order.id} className="rounded-lg border p-4 dark:border-zinc-800">

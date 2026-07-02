@@ -5,19 +5,25 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { ROUTES } from "@/constants";
 
-export function LogoutButton() {
+interface LogoutButtonProps {
+  isLoggedIn?: boolean;
+}
+
+export function LogoutButton({ isLoggedIn = true }: LogoutButtonProps) {
   const router = useRouter();
+
+  if (!isLoggedIn) return null;
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
-    toast.success("Déconnecté");
+    toast.success("Signed out");
     router.push(ROUTES.home);
     router.refresh();
   }
 
   return (
     <Button variant="outline" onClick={handleLogout}>
-      Déconnexion
+      Sign out
     </Button>
   );
 }

@@ -94,12 +94,21 @@ export function ProductCard({ product, className }: ProductCardProps) {
             {formatPrice(product.price, "USD")}
           </span>
         </div>
+        <div className="flex mt-2 items-center gap-3">
         <AddToCartButton
           product={snapshot}
           disabled={product.stock === 0}
           variant="card"
-          className="mt-2 lg:hidden"
+          className=""
         />
+        <Link
+          href={`/shop/product/${product.slug}`}
+          className=" items-center w-full gap-1.5  px-4 py-3 text-xs font-medium bg-accent rounded-lg justify-center flex backdrop-blur-sm transition-opacity group-hover:opacity-100"
+        >
+          <Eye className="h-3.5 w-3.5" />
+          Quick View
+        </Link>
+        </div>
       </div>
     </article>
   );

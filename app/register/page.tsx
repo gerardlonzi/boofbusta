@@ -36,16 +36,16 @@ export default function RegisterPage() {
         const details = json.error?.details;
         if (details) {
           const firstError = Object.values(details).flat()[0];
-          throw new Error(typeof firstError === "string" ? firstError : json.error?.message ?? "Erreur");
+          throw new Error(typeof firstError === "string" ? firstError : json.error?.message ?? "Something went wrong");
         }
-        throw new Error(json.error?.message ?? "Erreur");
+        throw new Error(json.error?.message ?? "Something went wrong");
       }
       await syncGuestDataOnLogin();
       toast.success("Compte créé avec succès");
       router.push(ROUTES.account);
       router.refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erreur");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }

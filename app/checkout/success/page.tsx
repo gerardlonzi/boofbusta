@@ -12,18 +12,18 @@ export default async function CheckoutSuccessPage({ searchParams }: SuccessPageP
   return (
     <div className="mx-auto max-w-lg px-4 py-16 text-center">
       <div className="mb-4 text-5xl">✓</div>
-      <h1 className="text-2xl font-bold">Commande confirmée !</h1>
+      <h1 className="text-2xl font-bold">Order confirmed!</h1>
       {params.order && (
         <p className="mt-2 text-zinc-600">
-          Numéro de commande : <strong>{params.order}</strong>
+          Order number: <strong>{params.order}</strong>
         </p>
       )}
       <div className="mt-8 flex justify-center gap-4">
         <Button asChild>
-          <Link href={ROUTES.accountOrders}>Voir mes commandes</Link>
+          <Link href={ROUTES.accountOrders}>View my orders</Link>
         </Button>
         <Button variant="outline" asChild>
-          <Link href={ROUTES.shop}>Continuer vos achats</Link>
+          <Link href={ROUTES.shop}>Continue shopping</Link>
         </Button>
       </div>
     </div>

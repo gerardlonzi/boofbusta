@@ -1,7 +1,17 @@
 import Link from "next/link";
-import { APP_NAME, NAV_CATEGORIES, ROUTES } from "@/constants";
+import { unstable_cache } from "next/cache";
+import { APP_NAME, ROUTES } from "@/constants";
+import { getCategories } from "@/services/category.service";
 
-export function Footer() {
+const getCachedCategories = unstable_cache(
+  async () => getCategories(),
+  ["footer-categories"],
+  { revalidate: 300, tags: ["categories"] }
+);
+
+export async function Footer() {
+  const categories = await getCachedCategories();
+
   return (
     <footer className="border-t border-border bg-surface">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
@@ -36,7 +46,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-cream">Custom Area</h4>
+            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-cream">Customer Area</h4>
             <ul className="space-y-2 text-sm text-muted">
               <li><Link href={ROUTES.login} className="hover:text-accent">My Account</Link></li>
               <li><Link href={ROUTES.cart} className="hover:text-accent">My Cart</Link></li>
@@ -48,13 +58,17 @@ export function Footer() {
           <div>
             <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-cream">Categories</h4>
             <ul className="space-y-2 text-sm text-muted">
-              {NAV_CATEGORIES.slice(0, 5).map((cat) => (
-                <li key={cat.slug}>
-                  <Link href={`/shop/category/${cat.slug}`} className="hover:text-accent">
-                    {cat.label}
-                  </Link>
-                </li>
-              ))}
+              {categories.length > 0 ? (
+                categories.map((cat) => (
+                  <li key={cat.id}>
+                    <Link href={`/shop/category/${cat.slug}`} className="hover:text-accent">
+                      {cat.name}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li><Link href="/shop" className="hover:text-accent">Browse all products</Link></li>
+              )}
             </ul>
           </div>
         </div>

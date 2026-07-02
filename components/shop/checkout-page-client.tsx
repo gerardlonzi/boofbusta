@@ -38,7 +38,7 @@ export function CheckoutPageClient() {
         street: "",
         city: "",
         postalCode: "",
-        country: "FR",
+        country: "US",
       },
     },
   });
@@ -91,17 +91,17 @@ export function CheckoutPageClient() {
         body: JSON.stringify(data),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error?.message ?? "Erreur");
+      if (!res.ok) throw new Error(json.error?.message ?? "Something went wrong");
 
       if (json.data.checkoutUrl) {
         window.location.href = json.data.checkoutUrl;
       } else {
         useCartStore.getState().clearCart();
-        toast.success("Commande confirmée");
+        toast.success("Order confirmed");
         router.push(`/checkout/success?order=${json.data.order.orderNumber}`);
       }
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erreur");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }

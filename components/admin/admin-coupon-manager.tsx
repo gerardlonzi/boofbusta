@@ -78,34 +78,34 @@ export function AdminCouponManager({ coupons: initial }: AdminCouponManagerProps
         body: JSON.stringify(body),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error?.message ?? "Erreur");
-      toast.success(editing ? "Coupon modifié" : "Coupon créé");
+      if (!res.ok) throw new Error(json.error?.message ?? "Something went wrong");
+      toast.success(editing ? "Coupon updated" : "Coupon created");
       setShowForm(false);
       router.refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erreur");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
   }
 
   async function handleDelete(id: string) {
-    if (!confirm("Supprimer ce coupon ?")) return;
+    if (!confirm("Delete this coupon?")) return;
     try {
       const res = await fetch(`/api/coupons?id=${id}`, { method: "DELETE" });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error?.message ?? "Erreur");
-      toast.success("Coupon supprimé");
+      if (!res.ok) throw new Error(json.error?.message ?? "Something went wrong");
+      toast.success("Coupon deleted");
       router.refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erreur");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     }
   }
 
   return (
     <>
       <div className="mb-4 flex justify-end">
-        <Button onClick={openCreate}>+ Ajouter un coupon</Button>
+        <Button onClick={openCreate}>+ Add Coupon</Button>
       </div>
 
       <div className="space-y-3">
@@ -114,14 +114,14 @@ export function AdminCouponManager({ coupons: initial }: AdminCouponManagerProps
             <div>
               <p className="font-mono font-medium">{c.code}</p>
               <p className="text-sm text-zinc-500">
-                {c.type} — {c.value}{c.type === "PERCENTAGE" ? "%" : "€"}
+                {c.type} — {c.value}{c.type === "PERCENTAGE" ? "%" : "$"}
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <Badge variant={c.isActive ? "default" : "secondary"}>{c.isActive ? "Actif" : "Inactif"}</Badge>
+              <Badge variant={c.isActive ? "default" : "secondary"}>{c.isActive ? "Active" : "Inactive"}</Badge>
               <span className="text-sm">{c.usedCount}/{c.maxUses ?? "∞"}</span>
-              <Button size="sm" variant="outline" onClick={() => openEdit(c)}>Modifier</Button>
-              <Button size="sm" variant="outline" onClick={() => handleDelete(c.id)} className="text-red-600">Supprimer</Button>
+              <Button size="sm" variant="outline" onClick={() => openEdit(c)}>Edit</Button>
+              <Button size="sm" variant="outline" onClick={() => handleDelete(c.id)} className="text-red-600">Delete</Button>
             </div>
           </div>
         ))}
@@ -130,7 +130,7 @@ export function AdminCouponManager({ coupons: initial }: AdminCouponManagerProps
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="w-full max-w-md rounded-xl bg-background p-6 shadow-xl">
-            <h2 className="mb-4 text-xl font-bold">{editing ? "Modifier le coupon" : "Nouveau coupon"}</h2>
+            <h2 className="mb-4 text-xl font-bold">{editing ? "Edit Coupon" : "New Coupon"}</h2>
             <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <Label>Code</Label>
@@ -144,32 +144,32 @@ export function AdminCouponManager({ coupons: initial }: AdminCouponManagerProps
                     value={form.type}
                     onChange={(e) => setForm({ ...form, type: e.target.value as "PERCENTAGE" | "FIXED" })}
                   >
-                    <option value="PERCENTAGE">Pourcentage</option>
-                    <option value="FIXED">Montant fixe</option>
+                    <option value="PERCENTAGE">Percentage</option>
+                    <option value="FIXED">Fixed amount</option>
                   </select>
                 </div>
                 <div>
-                  <Label>Valeur</Label>
+                  <Label>Value</Label>
                   <Input type="number" value={form.value} onChange={(e) => setForm({ ...form, value: e.target.value })} required />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label>Min. achat</Label>
+                  <Label>Min. purchase</Label>
                   <Input type="number" value={form.minPurchase} onChange={(e) => setForm({ ...form, minPurchase: e.target.value })} />
                 </div>
                 <div>
-                  <Label>Max utilisations</Label>
+                  <Label>Max uses</Label>
                   <Input type="number" value={form.maxUses} onChange={(e) => setForm({ ...form, maxUses: e.target.value })} />
                 </div>
               </div>
               <label className="flex items-center gap-2 text-sm">
                 <input type="checkbox" checked={form.isActive} onChange={(e) => setForm({ ...form, isActive: e.target.checked })} />
-                Actif
+                Active
               </label>
               <div className="flex gap-3 pt-2">
-                <Button type="submit" disabled={loading}>{loading ? "..." : "Enregistrer"}</Button>
-                <Button type="button" variant="outline" onClick={() => setShowForm(false)}>Annuler</Button>
+                <Button type="submit" disabled={loading}>{loading ? "Saving..." : "Save"}</Button>
+                <Button type="button" variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
               </div>
             </form>
           </div>

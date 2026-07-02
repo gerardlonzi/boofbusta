@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import { ImageUpload } from "@/components/admin/image-upload";
 import { formatPrice } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -49,7 +50,6 @@ const emptyForm = {
   tags: "",
   status: "ACTIVE" as const,
   featured: false,
-  images: "",
 };
 
 export function AdminProductManager({ products: initial, categories }: AdminProductManagerProps) {
@@ -57,11 +57,13 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<Product | null>(null);
   const [form, setForm] = useState(emptyForm);
+  const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   function openCreate() {
     setEditing(null);
     setForm({ ...emptyForm, categoryId: categories[0]?.id ?? "" });
+    setImages([]);
     setShowForm(true);
   }
 
@@ -79,8 +81,8 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
       tags: p.tags.join(", "),
       status: p.status as "ACTIVE",
       featured: p.featured,
-      images: p.images.join("\n"),
     });
+    setImages(p.images);
     setShowForm(true);
   }
 
@@ -97,7 +99,7 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
       tags: form.tags ? form.tags.split(",").map((t) => t.trim()).filter(Boolean) : [],
       status: form.status,
       featured: form.featured,
-      images: form.images ? form.images.split("\n").map((u) => u.trim()).filter(Boolean) : [],
+      images,
     };
   }
 
@@ -114,46 +116,46 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
         body: JSON.stringify(payload),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error?.message ?? "Erreur");
-      toast.success(editing ? "Produit modifié" : "Produit créé");
+      if (!res.ok) throw new Error(json.error?.message ?? "Something went wrong");
+      toast.success(editing ? "Product updated" : "Product created");
       setShowForm(false);
       router.refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erreur");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
   }
 
   async function handleDelete(slug: string) {
-    if (!confirm("Supprimer ce produit ?")) return;
+    if (!confirm("Delete this product?")) return;
     try {
       const res = await fetch(`/api/products/${slug}`, { method: "DELETE" });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error?.message ?? "Erreur");
-      toast.success("Produit supprimé");
+      if (!res.ok) throw new Error(json.error?.message ?? "Something went wrong");
+      toast.success("Product deleted");
       router.refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erreur");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     }
   }
 
   return (
     <>
       <div className="mb-4 flex justify-end">
-        <Button onClick={openCreate}>+ Ajouter un produit</Button>
+        <Button onClick={openCreate}>+ Add Product</Button>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b text-left">
-              <th className="p-3">Nom</th>
+              <th className="p-3">Name</th>
               <th className="p-3">SKU</th>
-              <th className="p-3">Prix</th>
+              <th className="p-3">Price</th>
               <th className="p-3">Stock</th>
-              <th className="p-3">Statut</th>
-              <th className="p-3">Catégorie</th>
+              <th className="p-3">Status</th>
+              <th className="p-3">Category</th>
               <th className="p-3">Actions</th>
             </tr>
           </thead>
@@ -168,8 +170,8 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
                 <td className="p-3">{p.category?.name ?? "—"}</td>
                 <td className="p-3">
                   <div className="flex gap-2">
-                    <Button size="sm" variant="outline" onClick={() => openEdit(p)}>Modifier</Button>
-                    <Button size="sm" variant="outline" onClick={() => handleDelete(p.slug)} className="text-red-600">Supprimer</Button>
+                    <Button size="sm" variant="outline" onClick={() => openEdit(p)}>Edit</Button>
+                    <Button size="sm" variant="outline" onClick={() => handleDelete(p.slug)} className="text-red-600">Delete</Button>
                   </div>
                 </td>
               </tr>
@@ -181,10 +183,10 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl bg-background p-6 shadow-xl">
-            <h2 className="mb-4 text-xl font-bold">{editing ? "Modifier le produit" : "Nouveau produit"}</h2>
+            <h2 className="mb-4 text-xl font-bold">{editing ? "Edit Product" : "New Product"}</h2>
             <form onSubmit={handleSubmit} className="space-y-3">
               <div>
-                <Label>Nom</Label>
+                <Label>Name</Label>
                 <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
               </div>
               <div>
@@ -199,11 +201,11 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label>Prix</Label>
+                  <Label>Price</Label>
                   <Input type="number" step="0.01" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} required />
                 </div>
                 <div>
-                  <Label>Prix barré</Label>
+                  <Label>Compare Price</Label>
                   <Input type="number" step="0.01" value={form.comparePrice} onChange={(e) => setForm({ ...form, comparePrice: e.target.value })} />
                 </div>
               </div>
@@ -218,7 +220,7 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
                 </div>
               </div>
               <div>
-                <Label>Catégorie</Label>
+                <Label>Category</Label>
                 <select
                   className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                   value={form.categoryId}
@@ -231,17 +233,30 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
                 </select>
               </div>
               <div>
-                <Label>Images (URL, une par ligne)</Label>
-                <textarea
+                <Label>Featured Product</Label>
+                <select
                   className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                  rows={2}
-                  value={form.images}
-                  onChange={(e) => setForm({ ...form, images: e.target.value })}
-                />
+                  value={form.featured ? "true" : "false"}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      featured: e.target.value === "true",
+                    })
+                  }
+                >
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
               </div>
+              <ImageUpload
+                label="Product Images"
+                images={images}
+                onChange={setImages}
+                folder="products"
+              />
               <div className="flex gap-3 pt-2">
-                <Button type="submit" disabled={loading}>{loading ? "..." : "Enregistrer"}</Button>
-                <Button type="button" variant="outline" onClick={() => setShowForm(false)}>Annuler</Button>
+                <Button type="submit" disabled={loading}>{loading ? "Saving..." : "Save"}</Button>
+                <Button type="button" variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
               </div>
             </form>
           </div>

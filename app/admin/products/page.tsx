@@ -50,7 +50,7 @@ export default async function AdminProductsPage() {
 
       <Link href={ROUTES.admin} className="text-sm text-zinc-500 hover:underline">← Dashboard</Link>
 
-      <h1 className="mb-8 mt-4 text-3xl font-bold">Gestion Produits</h1>
+      <h1 className="mb-8 mt-4 text-3xl font-bold">Manage Products</h1>
 
       <AdminProductManager
 

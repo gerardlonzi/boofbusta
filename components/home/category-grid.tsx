@@ -70,7 +70,7 @@ export function CategoryGrid({ dbCategories }: CategoryGridProps) {
 
         <p className="mt-2 text-center text-zinc-600">View our category displayed products</p>
 
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 ">
 
           {dbCategories.map((cat) => (
 

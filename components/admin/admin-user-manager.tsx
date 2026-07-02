@@ -30,11 +30,11 @@ export function AdminUserManager({ users }: AdminUserManagerProps) {
         body: JSON.stringify({ id, action, role }),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error?.message ?? "Erreur");
+      if (!res.ok) throw new Error(json.error?.message ?? "Something went wrong");
       toast.success("Utilisateur mis à jour");
       router.refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erreur");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     }
   }
 

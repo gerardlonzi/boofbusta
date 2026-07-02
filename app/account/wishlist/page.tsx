@@ -15,8 +15,8 @@ export default async function WishlistPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
-      <Link href={ROUTES.account} className="text-sm text-zinc-500 hover:underline">← Mon compte</Link>
-      <h1 className="mb-8 mt-4 text-3xl font-bold">Ma wishlist</h1>
+      <Link href={ROUTES.account} className="text-sm text-zinc-500 hover:underline">← My Account</Link>
+      <h1 className="mb-8 mt-4 text-3xl font-bold">My Wishlist</h1>
       {wishlist.items.length === 0 ? (
         <p className="text-zinc-500">Votre wishlist est vide.</p>
       ) : (

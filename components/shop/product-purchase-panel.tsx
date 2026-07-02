@@ -87,7 +87,7 @@ export function ProductPurchasePanel({ product, disabled }: ProductPurchasePanel
           className="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-white transition-all hover:bg-primary-light hover:shadow-lg hover:shadow-primary/20 disabled:opacity-50"
         >
           <ShoppingBag className="h-5 w-5" />
-          {loading ? "Ajout..." : disabled ? "Rupture de stock" : "Ajouter au panier"}
+          {loading ? "Adding..." : disabled ? "Out of stock" : "Add to cart"}
         </button>
 
         {added && (

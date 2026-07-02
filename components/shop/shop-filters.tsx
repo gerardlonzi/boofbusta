@@ -26,7 +26,7 @@ export function ShopFilters({ categories, currentCategory, currentSort }: ShopFi
 
   const filterContent = (
     <>
-      <h2 className="mb-3 font-semibold">Catégories</h2>
+      <h2 className="mb-3 font-semibold">Categories</h2>
       <ul className="space-y-2 text-sm">
         <li>
           <Link
@@ -37,7 +37,7 @@ export function ShopFilters({ categories, currentCategory, currentSort }: ShopFi
             )}
             onClick={() => setOpen(false)}
           >
-            Toutes
+            All
           </Link>
         </li>
         {categories.map((cat) => (
@@ -58,7 +58,7 @@ export function ShopFilters({ categories, currentCategory, currentSort }: ShopFi
         ))}
       </ul>
 
-      <h2 className="mb-3 mt-6 font-semibold">Tri</h2>
+      <h2 className="mb-3 mt-6 font-semibold">Sort</h2>
       <ul className="space-y-2 text-sm">
         {SORT_OPTIONS.map((opt) => (
           <li key={opt.value}>
@@ -82,27 +82,25 @@ export function ShopFilters({ categories, currentCategory, currentSort }: ShopFi
 
   return (
     <>
-      {/* Mobile filter toggle */}
       <button
         type="button"
         onClick={() => setOpen(true)}
         className="mb-4 flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium lg:hidden"
       >
         <SlidersHorizontal className="h-4 w-4" />
-        Filtres
+        Filters
         {(currentCategory || (currentSort && currentSort !== "newest")) && (
-          <span className="rounded-full bg-primary px-2 py-0.5 text-xs text-white">Actif</span>
+          <span className="rounded-full bg-primary px-2 py-0.5 text-xs text-white">Active</span>
         )}
       </button>
 
-      {/* Mobile drawer */}
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
           <aside className="absolute bottom-0 left-0 right-0 max-h-[80vh] overflow-y-auto rounded-t-2xl bg-background p-6 shadow-xl">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-bold">Filtres</h2>
-              <button type="button" onClick={() => setOpen(false)} aria-label="Fermer">
+              <h2 className="text-lg font-bold">Filters</h2>
+              <button type="button" onClick={() => setOpen(false)} aria-label="Close">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -111,7 +109,6 @@ export function ShopFilters({ categories, currentCategory, currentSort }: ShopFi
         </div>
       )}
 
-      {/* Desktop sidebar */}
       <aside className="hidden w-56 shrink-0 lg:block">{filterContent}</aside>
     </>
   );
