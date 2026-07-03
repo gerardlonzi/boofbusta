@@ -3,9 +3,9 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="hero-glow relative overflow-hidden px-4 py-20 sm:py-28">
-      <div className="absolute inset-0 opacity-40" />
-      <div className="relative mx-auto max-w-4xl text-center">
+    <section className="hero-glow relative bg-img overflow-hidden px-4 py-20 sm:py-28">
+      <div className="absolute inset-0 opacity-[0.6] bg-black h-full w-full" />
+      <div className="relative mx-auto max-w-4xl  text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-primary-light">
           <Sparkles className="h-3.5 w-3.5" />
           Lab-tested • Responsibly Sourced
