@@ -49,12 +49,6 @@ body {
     radial-gradient(ellipse 50% 40% at 80% 20%, rgba(201, 169, 98, 0.12) 0%, transparent 60%);
 }
 
- .bg-img{
-  background-image: url('/ch5.jpg');
-  background-size: cover;
-  background-position: left top 52%;
-  background-repeat: no-repeat;
- }
 .card-shine {
   background: linear-gradient(145deg, var(--surface) 0%, #121812 100%);
 }

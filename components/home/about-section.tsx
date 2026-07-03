@@ -9,7 +9,7 @@ export function AboutSection() {
           <h2 className="mt-2 text-3xl font-bold text-cream">Know about us</h2>
           <div className="mt-6 space-y-4 text-muted leading-relaxed">
             <p>
-              Boofbusta premium collection of legal mushroom products showcases a diverse
+              Micro Dose Kitchen premium collection of legal mushroom products showcases a diverse
               selection of beneficial mushroom species, from soothing, psychedelic amanita muscaria
               products to non-intoxicating, cognitive-enhancing options like lion&apos;s mane.
             </p>

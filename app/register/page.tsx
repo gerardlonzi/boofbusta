@@ -95,7 +95,7 @@ export default function RegisterPage() {
               {errors.confirmPassword && <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>}
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Création..." : "S'inscrire"}
+              {loading ? "Création..." : "S&apos;inscrire"}
             </Button>
           </form>
           <p className="mt-4 text-center text-sm">

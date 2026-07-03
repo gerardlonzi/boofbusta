@@ -94,7 +94,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
             {formatPrice(product.price, "USD")}
           </span>
         </div>
-        <div className="flex mt-2 items-center gap-3 flex-wrap sm:flex-nowrap">
+        <div className="flex mt-2 items-center gap-3">
         <AddToCartButton
           product={snapshot}
           disabled={product.stock === 0}

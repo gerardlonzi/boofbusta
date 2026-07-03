@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { ProductPurchasePanel } from "@/components/shop/product-purchase-panel";
 import { WishlistButton } from "@/components/shop/wishlist-button";
 import type { Metadata } from "next";
-import { Check } from "lucide-react";
 
 export const revalidate = 300;
 
@@ -107,13 +106,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 {formatPrice(product.comparePrice)}
               </span>
             )}
-          </div>
-          <div className="space-y-2">
-<p className="flex items-center gap-2"><Check className="w-7 h-7 text-white p-1 rounded-full bg-green-500" /> Secure Payments</p>
-<p className="flex items-center gap-2"><Check className="w-7 h-7 text-white p-1 rounded-full bg-green-500" /> Satisfaction Guarantee</p>
-<p className="flex items-center gap-2"><Check className="w-7 h-7 text-white p-1 rounded-full bg-green-500" /> Worldwide Shipping</p>
-<p className="flex items-center gap-2"><Check className="w-7 h-7 text-white p-1 rounded-full bg-green-500" /> Money Back Guarantee</p>
-          
           </div>
           <p className="text-zinc-600 dark:text-zinc-400">{product.description}</p>
           <div className="text-sm text-zinc-500">

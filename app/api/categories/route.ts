@@ -1,5 +1,4 @@
 import { NextRequest } from "next/server";
-import { revalidateTag } from "next/cache";
 import { getCategories, createCategory } from "@/services/category.service";
 import { requireAdmin } from "@/lib/auth/cookies";
 import { categorySchema } from "@/validations/product";
@@ -20,7 +19,6 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const input = categorySchema.parse(body);
     const category = await createCategory(input);
-    revalidateTag("categories", { expire: 0 });
     return apiSuccess({ category }, 201);
   } catch (error) {
     return handleApiError(error);
