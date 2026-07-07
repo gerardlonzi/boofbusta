@@ -10,7 +10,7 @@ export function GuaranteeSection() {
         <h2 className="text-2xl font-bold text-cream">We Stand Behind Every Product</h2>
         <p className="mt-2 text-xl font-semibold text-accent">100% Money-Back Guarantee</p>
         <p className="mt-4 max-w-2xl text-muted">
-          At Micro Dose Kitchen, your satisfaction is our top priority. If you&apos;re ever unhappy
+          At Boofbusta, your satisfaction is our top priority. If you&apos;re ever unhappy
           with a purchase, we&apos;ll make it right — with a full money-back guarantee on every order.
         </p>
         <p className="mt-6 text-sm text-primary-light">

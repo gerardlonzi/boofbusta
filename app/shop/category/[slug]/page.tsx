@@ -9,7 +9,7 @@ export const revalidate = 60;
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ page?: string }>;zd
+  searchParams: Promise<{ page?: string }>;
 }
 
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
@@ -52,7 +52,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     <div className="px-4 py-8 sm:px-6 mx-auto max-w-7xl  ">
       <p className="mb-6 mt-4 text-sm text-zinc-500">
         {pagination.total} produit{pagination.total > 1 ? "s" : ""}</p>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
