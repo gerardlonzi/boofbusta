@@ -9,7 +9,7 @@ export const revalidate = 60;
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ page?: string }>;zd
+  searchParams: Promise<{ page?: string }>;
 }
 
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
