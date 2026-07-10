@@ -151,16 +151,7 @@ export function SiteHeader({ user, categories }: SiteHeaderProps) {
                 >
                   My Account
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileOpen(false);
-                    handleLogout();
-                  }}
-                  className="block py-2 text-sm text-red-400"
-                >
-                  Sign out
-                </button>
+                
               </>
             ) : (
               <Link
