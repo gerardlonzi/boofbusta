@@ -9,7 +9,7 @@ export const revalidate = 60;
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ page?: string }>;zd
+  searchParams: Promise<{ page?: string }>;
 }
 
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
@@ -33,13 +33,15 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   return (
     <div className="">
     <div className="relative h-[40vh]">
-    <Image
-                  src={category.image}
-                  alt={category.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
+   {category.image && (
+  <Image
+    src={category.image}
+    alt={category.name}
+    fill
+    className="object-cover"
+    sizes="(max-width:768px) 50vw, 25vw"
+  />
+)}
         <div className="absolute top-1/2 -translate-y-1/2 text-center w-full">
  <h1 className="text-5xl  font-bold">{category.name}</h1>
       {category.description && (
