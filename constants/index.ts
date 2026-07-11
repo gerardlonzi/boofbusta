@@ -1,4 +1,4 @@
-export const APP_NAME = "Micro Dose Kitchen";
+export const APP_NAME = "Boofbusta";
 export const APP_TAGLINE = "Taste the Balance — Nourish Mind, Body, and Mood";
 export const APP_DESCRIPTION =
   "Premium microdose products — lab-tested, responsibly sourced, crafted for the modern day.";

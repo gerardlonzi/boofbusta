@@ -10,13 +10,13 @@ export function QualitySection() {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-cream sm:text-3xl">OUR COMMITMENT TO QUALITY</h2>
           <p className="mx-auto mt-4 max-w-3xl text-muted">
-            At Micro Dose Kitchen, we&apos;re on a mission to bring you the best buzz from the finest
+            At Boofbusta, we&apos;re on a mission to bring you the best buzz from the finest
             products on the planet! We carefully craft each combination to get you faded in fun and
             unique ways. We use the best ingredients, create unbelievable flavors, and have all of
             our products tested at ISO-certified third-party labs.
           </p>
           <p className="mt-4 text-sm italic text-accent">
-            If a super potent cannabis plant and a scientist with O.C.D had a baby, it would be Micro Dose Kitchen.
+            If a super potent cannabis plant and a scientist with O.C.D had a baby, it would be Boofbusta.
           </p>
         </div>
 
