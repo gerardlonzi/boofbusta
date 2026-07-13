@@ -34,6 +34,10 @@ export const checkoutSchema = z.object({
   shippingMethod: z.string().default("standard"),
   couponCode: z.string().trim().optional(),
   notes: z.string().trim().max(500).optional(),
+  paymentMethod: z.enum([
+    "stripe",
+    "bitcoin"
+]),
 });
 
 export const addressSchema = z.object({
