@@ -20,7 +20,7 @@ export default async function OrdersPage() {
       <h1 className="mb-8 mt-4 text-3xl font-bold">My Orders</h1>
 
       {orders.length === 0 ? (
-        <p className="text-zinc-500">Aucune commande pour le moment.</p>
+        <p className="text-zinc-500">No order </p>
       ) : (
         <div className="space-y-4">
           {orders.map((order) => (

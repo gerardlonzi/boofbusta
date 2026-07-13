@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SlidersHorizontal, X } from "lucide-react";
 import { SORT_OPTIONS } from "@/constants";
 import { cn } from "@/lib/utils";
+import { buildPaginationUrl } from "@/lib/shop";
 
 interface ShopFiltersProps {
   categories: Array<{ id: string; name: string; slug: string }>;
@@ -114,9 +115,3 @@ export function ShopFilters({ categories, currentCategory, currentSort }: ShopFi
   );
 }
 
-export function buildPaginationUrl(
-  page: number,
-  params: { category?: string; sort?: string; search?: string }
-) {
-  return buildShopUrl({ ...params, page: page > 1 ? String(page) : undefined });
-}

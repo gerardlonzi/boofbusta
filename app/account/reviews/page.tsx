@@ -19,7 +19,7 @@ export default async function AccountReviewsPage() {
       <Link href={ROUTES.account} className="text-sm text-zinc-500 hover:underline">← My Account</Link>
       <h1 className="mb-8 mt-4 text-3xl font-bold">My Reviews</h1>
       {reviews.length === 0 ? (
-        <p className="text-zinc-500">Vous n&apos;avez pas encore laissé d&apos;avis.</p>
+        <p className="text-zinc-500">You have not yet drop review.</p>
       ) : (
         <div className="space-y-4">
           {reviews.map((r) => (

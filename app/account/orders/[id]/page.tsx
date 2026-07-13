@@ -54,14 +54,14 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
             ))}
           </div>
           <dl className="mt-4 space-y-1 border-t pt-4 text-sm">
-            <div className="flex justify-between"><dt>Sous-total</dt><dd>{formatPrice(order.subtotal)}</dd></div>
+            <div className="flex justify-between"><dt>Subtotal</dt><dd>{formatPrice(order.subtotal)}</dd></div>
             <div className="flex justify-between"><dt>TVA</dt><dd>{formatPrice(order.tax)}</dd></div>
-            <div className="flex justify-between"><dt>Livraison</dt><dd>{formatPrice(order.shipping)}</dd></div>
+            <div className="flex justify-between"><dt>Delivery</dt><dd>{formatPrice(order.shipping)}</dd></div>
             <div className="flex justify-between font-semibold"><dt>Total</dt><dd>{formatPrice(order.total)}</dd></div>
           </dl>
         </div>
         <div>
-          <h2 className="mb-3 font-semibold">Adresse de livraison</h2>
+          <h2 className="mb-3 font-semibold">Delivery Address</h2>
           <p className="text-sm text-zinc-600">
             {address.firstName} {address.lastName}<br />
             {address.street}<br />

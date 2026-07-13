@@ -1,13 +1,13 @@
 import { ProductCard } from "@/components/shop/product-card";
 
-import { ShopFilters, buildPaginationUrl } from "@/components/shop/shop-filters";
+import { ShopFilters } from "@/components/shop/shop-filters";
 
 import { getProducts } from "@/services/product.service";
 
 import { getCategories } from "@/services/category.service";
 
 import Link from "next/link";
-
+import { buildPaginationUrl } from "@/lib/shop";
 
 
 export const revalidate = 60;
@@ -98,13 +98,13 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
           <p className="mb-4 text-sm text-zinc-500">
 
-            {pagination.total} produit{pagination.total > 1 ? "s" : ""}
+            {pagination.total} product{pagination.total > 1 ? "s" : ""}
 
           </p>
 
           {products.length === 0 ? (
 
-            <p className="text-zinc-500">Aucun produit trouvé.</p>
+            <p className="text-zinc-500">No product found.</p>
 
           ) : (
 
