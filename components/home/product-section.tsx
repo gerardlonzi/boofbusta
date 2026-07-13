@@ -38,7 +38,7 @@ export function ProductSection({ title, subtitle, viewAllHref, products }: Produ
           </Link>
         )}
       </div>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 ">
+      <div className="grid grid-cols-2 gap-[5px] md:gap-4 md:grid-cols-3 ">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

@@ -8,7 +8,7 @@ export function HeroSection() {
       <div className="relative mx-auto max-w-4xl  text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-primary-light">
           <Sparkles className="h-3.5 w-3.5" />
-          Lab-tested • Responsibly Sourced
+          Lab-tested • Responsibly Sourced 
         </div>
         <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
           <span className="text-gradient-gold">MicroDose.</span>{" "}

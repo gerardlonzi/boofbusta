@@ -3,6 +3,7 @@ import { requireAdmin } from "@/lib/auth/cookies";
 import { getAdminStats } from "@/services/order.service";
 import { formatPrice } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LogoutButton } from "@/components/auth/logout-button";
 import Link from "next/link";
 import { ROUTES } from "@/constants";
 
@@ -33,7 +34,9 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <h1 className="mb-8 text-3xl font-bold">Admin Dashboard</h1>
+          <div className="flex justify-between">      <h1 className="mb-8 text-3xl font-bold">Admin Dashboard </h1>
+          <LogoutButton/></div>
+
 
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((card) => (

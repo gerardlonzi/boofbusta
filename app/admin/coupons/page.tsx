@@ -26,7 +26,7 @@ export default async function AdminCouponsPage() {
 
       <Link href={ROUTES.admin} className="text-sm text-zinc-500 hover:underline">← Dashboard</Link>
 
-      <h1 className="mb-8 mt-4 text-3xl font-bold">Gestion Coupons</h1>
+      <h1 className="mb-8 mt-4 text-3xl font-bold">Manage coupons Coupons</h1>
 
       <AdminCouponManager coupons={JSON.parse(JSON.stringify(coupons))} />
 

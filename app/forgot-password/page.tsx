@@ -35,7 +35,7 @@ export default function ForgotPasswordPage() {
   return (
     <div className="mx-auto flex min-h-[60vh] max-w-md items-center px-4 py-12">
       <Card className="w-full">
-        <CardHeader><CardTitle>Mot de passe oublié</CardTitle></CardHeader>
+        <CardHeader><CardTitle>forgot password?</CardTitle></CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
@@ -48,7 +48,7 @@ export default function ForgotPasswordPage() {
             </Button>
           </form>
           <p className="mt-4 text-center text-sm">
-            <Link href={ROUTES.login} className="hover:underline">Retour à la connexion</Link>
+            <Link href={ROUTES.login} className="hover:underline">Go back to login</Link>
           </p>
         </CardContent>
       </Card>

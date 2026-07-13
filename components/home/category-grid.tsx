@@ -70,7 +70,7 @@ export function CategoryGrid({ dbCategories }: CategoryGridProps) {
 
         <p className="mt-2 text-center text-zinc-600">View our category displayed products</p>
 
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 ">
+        <div className="mt-10 grid grid-cols-2 gap-[5px] md:gap-4 sm:grid-cols-3 ">
 
           {dbCategories.map((cat) => (
 
@@ -108,7 +108,7 @@ export function CategoryGrid({ dbCategories }: CategoryGridProps) {
 
                 {cat._count && (
 
-                  <p className="mt-1 text-xs text-zinc-500">{cat._count.products} produits</p>
+                  <p className="mt-1 text-xs text-zinc-500">{cat._count.products} products</p>
 
                 )}
 

@@ -16,12 +16,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <h1 className="mb-6 text-3xl font-bold">Recherche</h1>
+      <h1 className="mb-6 text-3xl font-bold">Search</h1>
       <SearchForm defaultValue={query} />
       {query && (
         <>
           <p className="mb-4 mt-6 text-sm text-zinc-500">
-            {result.pagination.total} résultat{result.pagination.total > 1 ? "s" : ""} pour &quot;{query}&quot;
+            {result.pagination.total} Result{result.pagination.total > 1 ? "s" : ""} For {query}&quot;
           </p>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {result.products.map((product) => (

@@ -17,7 +17,7 @@ export async function registerUser(input: RegisterInput) {
     },
   });
   if (existing) {
-    throw new AppError("Email ou nom d'utilisateur déjà utilisé", 409);
+    throw new AppError("this email already exist", 409);
   }
 
   const verifyToken = generateToken();
@@ -57,12 +57,12 @@ export async function registerUser(input: RegisterInput) {
 export async function loginUser(input: LoginInput) {
   const user = await prisma.user.findUnique({ where: { email: input.email } });
   if (!user || !user.isActive) {
-    throw new AppError("Identifiants invalides", 401);
+    throw new AppError("invalid details", 401);
   }
 
   const valid = await verifyPassword(input.password, user.password);
   if (!valid) {
-    throw new AppError("Identifiants invalides", 401);
+    throw new AppError("invalid details", 401);
   }
 
   const payload = {
@@ -80,7 +80,7 @@ export async function loginUser(input: LoginInput) {
 
 export async function verifyEmail(token: string) {
   const user = await prisma.user.findFirst({ where: { verifyToken: token } });
-  if (!user) throw new AppError("Token invalide", 400);
+  if (!user) throw new AppError("invalid token", 400);
 
   await prisma.user.update({
     where: { id: user.id },
@@ -110,7 +110,7 @@ export async function resetPassword(token: string, password: string) {
       resetTokenExp: { gt: new Date() },
     },
   });
-  if (!user) throw new AppError("Token invalide ou expiré", 400);
+  if (!user) throw new AppError("Invalid token", 400);
 
   const hashedPassword = await hashPassword(password);
   await prisma.user.update({

@@ -34,7 +34,7 @@ export default function LoginPage() {
       const json = await res.json();
       if (!res.ok) throw new Error(json.error?.message ?? "Something went wrong");
       await syncGuestDataOnLogin();
-      toast.success("Connexion réussie");
+      toast.success("Login successful.");
       router.push(json.data.user.role === "ADMIN" ? ROUTES.admin : ROUTES.account);
       router.refresh();
     } catch (err) {
@@ -58,22 +58,22 @@ export default function LoginPage() {
               {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
             </div>
             <div>
-              <Label htmlFor="password">Mot de passe</Label>
+              <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" {...register("password")} />
               {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>}
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Connexion..." : "Se connecter"}
+              {loading ? "Connexion..." : "Login"}
             </Button>
           </form>
           <div className="mt-4 space-y-2 text-center text-sm">
             <Link href={ROUTES.forgotPassword} className="text-zinc-600 hover:underline">
-              Mot de passe oublié ?
+              Forgot password ?
             </Link>
             <p>
-              Pas de compte ?{" "}
+              No account ?{" "}
               <Link href={ROUTES.register} className="font-medium hover:underline">
-                S&apos;inscrire
+                register
               </Link>
             </p>
           </div>

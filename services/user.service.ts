@@ -46,7 +46,7 @@ export async function createCoupon(input: CouponInput) {
   const existing = await prisma.coupon.findUnique({
     where: { code: input.code },
   });
-  if (existing) throw new AppError("Code coupon déjà existant", 409);
+  if (existing) throw new AppError("promotion code already exist", 409);
   return prisma.coupon.create({ data: input });
 }
 
