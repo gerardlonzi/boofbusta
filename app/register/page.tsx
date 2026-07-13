@@ -55,24 +55,24 @@ export default function RegisterPage() {
     <div className="mx-auto flex min-h-[60vh] max-w-md items-center px-4 py-12">
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>Créer un compte</CardTitle>
+          <CardTitle>Create account</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="firstName">Prénom</Label>
+                <Label htmlFor="firstName">Firsname</Label>
                 <Input id="firstName" {...register("firstName")} />
                 {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName.message}</p>}
               </div>
               <div>
-                <Label htmlFor="lastName">Nom</Label>
+                <Label htmlFor="lastName">Lastname</Label>
                 <Input id="lastName" {...register("lastName")} />
                 {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName.message}</p>}
               </div>
             </div>
             <div>
-              <Label htmlFor="username">Nom d&apos;utilisateur</Label>
+              <Label htmlFor="username">Username</Label>
               <Input id="username" {...register("username")} />
               {errors.username && <p className="mt-1 text-sm text-red-600">{errors.username.message}</p>}
             </div>
@@ -82,15 +82,15 @@ export default function RegisterPage() {
               {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
             </div>
             <div>
-              <Label htmlFor="password">Mot de passe</Label>
+              <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" {...register("password")} />
               {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>}
               <p className="mt-1 text-xs text-zinc-500">
-                Min. 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (!@#$...)
+                Min. 8 characters, 1 majuscule, 1 minuscule, 1 number and 1 special character (!@#$...)
               </p>
             </div>
             <div>
-              <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
+              <Label htmlFor="confirmPassword">Confirm password</Label>
               <Input id="confirmPassword" type="password" {...register("confirmPassword")} />
               {errors.confirmPassword && <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>}
             </div>
@@ -99,9 +99,9 @@ export default function RegisterPage() {
             </Button>
           </form>
           <p className="mt-4 text-center text-sm">
-            Déjà un compte ?{" "}
+           Already have and account ?{" "}
             <Link href={ROUTES.login} className="font-medium hover:underline">
-              Se connecter
+              Login
             </Link>
           </p>
         </CardContent>

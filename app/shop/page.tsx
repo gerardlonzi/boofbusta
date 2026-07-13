@@ -108,7 +108,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
           ) : (
 
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-2 gap-[5px] md:gap-4 md:grid-cols-3">
 
               {products.map((product) => (
 

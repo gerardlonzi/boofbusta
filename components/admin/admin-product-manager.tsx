@@ -196,13 +196,13 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
                   rows={3}
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
-                  required
+                  
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <Label>Price</Label>
-                  <Input type="number" step="0.01" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} required />
+                  <Input type="number" step="0.01" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })}  />
                 </div>
                 <div>
                   <Label>Compare Price</Label>
@@ -212,11 +212,11 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <Label>Stock</Label>
-                  <Input type="number" value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} required />
+                  <Input type="number" value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} />
                 </div>
                 <div>
                   <Label>SKU</Label>
-                  <Input value={form.sku} onChange={(e) => setForm({ ...form, sku: e.target.value })} required disabled={!!editing} />
+                  <Input value={form.sku} onChange={(e) => setForm({ ...form, sku: e.target.value })}  disabled={!!editing} />
                 </div>
               </div>
               <div>

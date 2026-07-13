@@ -72,7 +72,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-[5px] md:gap-4 md:grid-cols-2">
         <div className="relative aspect-square overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-900">
           {product.images[0] ? (
             <Image
@@ -85,7 +85,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             />
           ) : (
             <div className="flex h-full items-center justify-center text-zinc-400">
-              Pas d&apos;image
+              No image
             </div>
           )}
         </div>
@@ -119,7 +119,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div className="text-sm text-zinc-500">
             <p>SKU: {product.sku}</p>
             <p>Stock: {product.stock > 0 ? `${product.stock} available` : "Out of stock"}</p>
-            {product.brand && <p>Marque: {product.brand}</p>}
+            {product.brand && <p>Brand: {product.brand}</p>}
           </div>
           {product.tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
@@ -158,7 +158,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       {product.reviews.length > 0 && (
         <section className="mt-12">
-          <h2 className="mb-4 text-xl font-bold">Avis clients</h2>
+          <h2 className="mb-4 text-xl font-bold">Clients Reviews</h2>
           <div className="space-y-4">
             {product.reviews.map((review) => (
               <div key={review.id} className="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
@@ -171,7 +171,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 {review.comment && <p className="mt-2 text-sm text-zinc-600">{review.comment}</p>}
                 {review.adminReply && (
                   <p className="mt-2 rounded bg-zinc-50 p-2 text-sm dark:bg-zinc-900">
-                    <strong>Réponse:</strong> {review.adminReply}
+                    <strong>Answer:</strong> {review.adminReply}
                   </p>
                 )}
               </div>

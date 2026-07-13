@@ -120,43 +120,43 @@ export function CheckoutPageClient() {
         <div className="lg:col-span-2">
           <Card>
             <CardHeader>
-              <CardTitle>Adresse de livraison</CardTitle>
+              <CardTitle>Address of delivery</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label>Prénom</Label>
+                    <Label>Firsname</Label>
                     <Input {...register("shippingAddress.firstName")} />
                     {errors.shippingAddress?.firstName && (
                       <p className="text-sm text-red-600">{errors.shippingAddress.firstName.message}</p>
                     )}
                   </div>
                   <div>
-                    <Label>Nom</Label>
+                    <Label>Name</Label>
                     <Input {...register("shippingAddress.lastName")} />
                   </div>
                 </div>
                 <div>
-                  <Label>Adresse</Label>
+                  <Label>Address</Label>
                   <Input {...register("shippingAddress.street")} />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label>Ville</Label>
+                    <Label>City</Label>
                     <Input {...register("shippingAddress.city")} />
                   </div>
                   <div>
-                    <Label>Code postal</Label>
+                    <Label>Postal Code</Label>
                     <Input {...register("shippingAddress.postalCode")} />
                   </div>
                 </div>
                 <div>
-                  <Label>Pays</Label>
+                  <Label>Country</Label>
                   <Input {...register("shippingAddress.country")} />
                 </div>
                 <div>
-                  <Label>Code promo (optionnel)</Label>
+                  <Label>Code promo (optionnal)</Label>
                   <Input {...register("couponCode")} />
                 </div>
                 <Button type="submit" className="w-full" size="lg" disabled={loading || syncing}>
@@ -168,21 +168,21 @@ export function CheckoutPageClient() {
         </div>
 
         <div className="rounded-2xl border border-border bg-surface p-6">
-          <h2 className="mb-4 font-semibold">Récapitulatif</h2>
+          <h2 className="mb-4 font-semibold">Récapitul</h2>
           {syncing ? (
-            <p className="text-sm text-muted">Chargement...</p>
+            <p className="text-sm text-muted">Loading...</p>
           ) : summary ? (
             <dl className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <dt>Sous-total</dt>
+                <dt>Subtotal</dt>
                 <dd>{formatPrice(summary.subtotal)}</dd>
               </div>
               <div className="flex justify-between">
-                <dt>TVA</dt>
+                <dt>Tax</dt>
                 <dd>{formatPrice(summary.tax)}</dd>
               </div>
               <div className="flex justify-between">
-                <dt>Livraison</dt>
+                <dt>Shipping</dt>
                 <dd>{summary.shipping === 0 ? "Gratuite" : formatPrice(summary.shipping)}</dd>
               </div>
               <div className="flex justify-between border-t pt-2 font-semibold">
@@ -191,7 +191,7 @@ export function CheckoutPageClient() {
               </div>
             </dl>
           ) : (
-            <p className="text-sm text-red-500">Panier vide. <a href="/cart" className="underline">Retour au panier</a></p>
+            <p className="text-sm text-red-500">Empty cart. <a href="/cart" className="underline">Go back to Cart</a></p>
           )}
         </div>
       </div>

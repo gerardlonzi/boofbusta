@@ -2,11 +2,11 @@ import { z } from "zod";
 
 export const productSchema = z.object({
   name: z.string().trim().min(2).max(200),
-  description: z.string().trim().min(10),
-  price: z.coerce.number().positive(),
+  description: z.string().trim().min(10).optional().nullable(),
+  price: z.coerce.number().positive().optional().nullable(),
   comparePrice: z.coerce.number().positive().optional().nullable(),
-  stock: z.coerce.number().int().min(0).default(0),
-  sku: z.string().trim().min(1),
+  stock: z.coerce.number().int().min(0).default(0).optional().nullable(),
+  sku: z.string().trim().min(1).optional().nullable(),
   categoryId: z.string().min(1),
   brand: z.string().trim().optional().nullable(),
   tags: z.array(z.string()).default([]),
