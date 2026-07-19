@@ -22,7 +22,7 @@ export function LogoutButton({ isLoggedIn = true }: LogoutButtonProps) {
   }
 
   return (
-    <Button variant="outline bg-red-300 pointer" onClick={handleLogout}>
+    <Button variant="outline" className="bg-red-300 pointer" onClick={handleLogout}>
       Sign out
     </Button>
   );
