@@ -6,7 +6,7 @@ export const productSchema = z.object({
   price: z.coerce.number().positive().optional().nullable(),
   comparePrice: z.coerce.number().positive().optional().nullable(),
   stock: z.coerce.number().int().min(0).default(0).optional().nullable(),
-  sku: z.string().trim().min(1).optional().nullable(),
+  sku: z.string().trim().min(1),
   categoryId: z.string().min(1),
   brand: z.string().trim().optional().nullable(),
   tags: z.array(z.string()).default([]),
