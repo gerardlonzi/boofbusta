@@ -189,6 +189,7 @@ console.log(json.data.cart.totals);
               <div className="flex justify-between">
                 <dt>Shipping</dt>
                 <dd>{summary.shipping === 0 ? "Free" : formatPrice(summary.shipping)}</dd>
+
               </div>
               <div className="flex justify-between border-t pt-2 font-semibold">
                 <dt>Total</dt>
