@@ -50,6 +50,9 @@ export function CheckoutPageClient() {
         const res = await fetch("/api/cart");
         if (res.ok) {
           const json = await res.json();
+          console.log(json.data.cart);
+console.log(json.data.cart.items);
+console.log(json.data.cart.totals);
           const items = json.data.cart.items;
           if (items.length === 0 && zustandItems.length > 0) {
             for (const item of zustandItems) {
@@ -162,6 +165,8 @@ export function CheckoutPageClient() {
                 <Button type="submit" className="w-full" size="lg" disabled={loading || syncing}>
                   {loading ? "Traitement..." : stripeEnabled ? "Payer avec Stripe" : "Confirmer la commande"}
                 </Button>
+                <div className="space-y-3">
+</div>
               </form>
             </CardContent>
           </Card>
@@ -183,7 +188,8 @@ export function CheckoutPageClient() {
               </div>
               <div className="flex justify-between">
                 <dt>Shipping</dt>
-                <dd>{summary.shipping === 0 ? "Gratuite" : formatPrice(summary.shipping)}</dd>
+                <dd>{summary.shipping === 0 ? "Free" : formatPrice(summary.shipping)}</dd>
+
               </div>
               <div className="flex justify-between border-t pt-2 font-semibold">
                 <dt>Total</dt>
