@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifyAccessToken, verifyRefreshToken, signAccessToken } from "@/lib/auth/jwt";
+import {
+  verifyAccessToken,
+  verifyRefreshToken,
+  signAccessToken,
+} from "@/lib/auth/jwt";
 import {
   ACCESS_TOKEN_COOKIE,
   REFRESH_TOKEN_COOKIE,
@@ -17,6 +21,7 @@ export async function middleware(request: NextRequest) {
   const accessToken = request.cookies.get(ACCESS_TOKEN_COOKIE)?.value;
   const refreshToken = request.cookies.get(REFRESH_TOKEN_COOKIE)?.value;
 
+  // ── Résolution de la session ─────────────────────────────────────────────
   let session = accessToken ? await verifyAccessToken(accessToken) : null;
   let shouldRefresh = false;
 
@@ -27,9 +32,10 @@ export async function middleware(request: NextRequest) {
 
   const isProtected = PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
   const isAdmin = pathname.startsWith(ADMIN_PREFIX);
-  const isAuthPage = AUTH_PAGES.some((p) => pathname.startsWith(p));
+  const isAuthPage = AUTH_PAGES.some((p) => pathname === p || pathname.startsWith(p + "/"));
 
-  async function withFreshCookies(response: NextResponse) {
+  // ── Helper : pose les nouveaux cookies si refresh nécessaire ─────────────
+  async function withFreshCookies(response: NextResponse): Promise<NextResponse> {
     if (shouldRefresh && session && refreshToken) {
       const newAccessToken = await signAccessToken(session);
       return setAuthCookies(response, newAccessToken, refreshToken);
@@ -37,25 +43,30 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
+  // ── Route protégée sans session → /login ────────────────────────────────
   if ((isProtected || isAdmin) && !session) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("redirect", pathname);
-    return securityHeaders(await withFreshCookies(NextResponse.redirect(url)));
+    // Pas de withFreshCookies ici : pas de session, rien à rafraîchir
+    return securityHeaders(NextResponse.redirect(url));
   }
 
+  // ── Admin mais pas le bon rôle → accueil ────────────────────────────────
   if (isAdmin && session?.role !== "ADMIN") {
     return securityHeaders(
       await withFreshCookies(NextResponse.redirect(new URL("/", request.url)))
     );
   }
 
+  // ── Déjà connecté sur une page auth → /account ──────────────────────────
   if (isAuthPage && session) {
     return securityHeaders(
       await withFreshCookies(NextResponse.redirect(new URL("/account", request.url)))
     );
   }
 
+  // ── Passage normal ───────────────────────────────────────────────────────
   return securityHeaders(await withFreshCookies(NextResponse.next()));
 }
 

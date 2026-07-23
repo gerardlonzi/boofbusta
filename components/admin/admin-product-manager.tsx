@@ -150,7 +150,8 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b text-left">
-              <th className="p-3">Name</th>
+            <th className="p-3">Image</th>
+              <th className="p-3 " >Name</th>
               <th className="p-3">SKU</th>
               <th className="p-3">Price</th>
               <th className="p-3">Stock</th>
@@ -162,7 +163,8 @@ export function AdminProductManager({ products: initial, categories }: AdminProd
           <tbody>
             {initial.map((p) => (
               <tr key={p.id} className="border-b">
-                <td className="p-3">{p.name}</td>
+                <td className="p-3"><img className="size-16" src={p.images} alt="product-img" /></td>
+                <td className="p-3 truncate" >{p.name}</td>
                 <td className="p-3">{p.sku}</td>
                 <td className="p-3">{formatPrice(p.price)}</td>
                 <td className="p-3">{p.stock}</td>

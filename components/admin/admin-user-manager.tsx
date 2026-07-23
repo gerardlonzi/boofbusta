@@ -31,7 +31,7 @@ export function AdminUserManager({ users }: AdminUserManagerProps) {
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error?.message ?? "Something went wrong");
-      toast.success("Utilisateur mis à jour");
+      toast.success("Updated");
       router.refresh();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Something went wrong");
@@ -43,10 +43,10 @@ export function AdminUserManager({ users }: AdminUserManagerProps) {
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b text-left">
-            <th className="p-3">Nom</th>
+            <th className="p-3">Name</th>
             <th className="p-3">Email</th>
             <th className="p-3">Rôle</th>
-            <th className="p-3">Statut</th>
+            <th className="p-3">Status</th>
             <th className="p-3">Actions</th>
           </tr>
         </thead>
@@ -56,7 +56,7 @@ export function AdminUserManager({ users }: AdminUserManagerProps) {
               <td className="p-3">{u.firstName} {u.lastName}</td>
               <td className="p-3">{u.email}</td>
               <td className="p-3"><Badge>{u.role}</Badge></td>
-              <td className="p-3">{u.isActive ? "Actif" : "Inactif"}</td>
+              <td className="p-3">{u.isActive ? "Active" : "Inactive"}</td>
               <td className="p-3">
                 <div className="flex gap-2">
                   <Button
@@ -64,20 +64,20 @@ export function AdminUserManager({ users }: AdminUserManagerProps) {
                     variant="outline"
                     onClick={() => handleAction(u.id, "toggleActive")}
                   >
-                    {u.isActive ? "Désactiver" : "Activer"}
+                    {u.isActive ? "Disable" : "Active"}
                   </Button>
                   {u.role === "CUSTOMER" ? (
                     <Button
                       size="sm"
-                      variant="outline"
+                      variant="destructive"
                       onClick={() => handleAction(u.id, "updateRole", "ADMIN")}
                     >
-                      Promouvoir admin
+                      Promote to admin
                     </Button>
                   ) : (
                     <Button
                       size="sm"
-                      variant="outline"
+                      variant="destructive"
                       onClick={() => handleAction(u.id, "updateRole", "CUSTOMER")}
                     >
                       Rétrograder

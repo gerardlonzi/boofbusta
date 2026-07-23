@@ -37,10 +37,16 @@ enum PaymentStatus {
   REFUNDED
 }
 
+enum PaymentMethod {
+  STRIPE
+  BITCOIN
+}
+
 enum CouponType {
   PERCENTAGE
   FIXED
 }
+
 
 // ─── User ────────────────────────────────────────────────────────────────────
 
@@ -161,6 +167,7 @@ model WishlistItem {
 // ─── Order ───────────────────────────────────────────────────────────────────
 
 model Order {
+
   id              String        @id @default(auto()) @map("_id") @db.ObjectId
   orderNumber     String        @unique
   userId          String        @db.ObjectId
@@ -173,18 +180,19 @@ model Order {
   total           Float
   status          OrderStatus   @default(PENDING)
   paymentStatus   PaymentStatus @default(PENDING)
+  paymentMethod   PaymentMethod @default(STRIPE)
   stripeSessionId String?
   stripePaymentId String?
+  bitcoinPayment  BitcoinPayment?
   shippingAddress Json
   billingAddress  Json?
   shippingMethod  String?
   couponId        String?       @db.ObjectId
   coupon          Coupon?       @relation(fields: [couponId], references: [id])
   notes           String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
-
 model OrderItem {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
   orderId   String  @db.ObjectId
@@ -249,4 +257,30 @@ model Address {
   isDefault  Boolean @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+model BitcoinPayment {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  orderId String @unique @db.ObjectId
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  address String
+
+  amountBTC Float
+
+  amountUSD Float
+
+  txid String?
+
+  confirmations Int @default(0)
+
+  verified Boolean @default(false)
+
+  paidAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+
 }

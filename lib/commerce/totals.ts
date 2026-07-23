@@ -1,8 +1,19 @@
+/**
+ * lib/commerce/totals.ts
+ *
+ * Les prix sont stockés en DOLLARS dans MongoDB (ex: price: 80 = $80.00).
+ * Aucune conversion nécessaire.
+ */
+
 import {
   TAX_RATE,
   SHIPPING_FLAT_RATE,
   FREE_SHIPPING_THRESHOLD,
 } from "@/constants/commerce";
+
+function round(n: number): number {
+  return Math.round(n * 100) / 100;
+}
 
 export function calculateCartTotals(
   items: { price: number; quantity: number }[],
@@ -12,23 +23,19 @@ export function calculateCartTotals(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  const tax = subtotal*TAX_RATE;
-  const shipping =
-    subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FLAT_RATE;
-  const discount = couponDiscount;
-  const total = Math.max(0, subtotal + tax + shipping - discount);
+
+  const tax = round(subtotal * TAX_RATE);
+  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FLAT_RATE;
+  const discount = round(couponDiscount);
+  const total = round(Math.max(0, subtotal + tax + shipping - discount));
 
   return {
     subtotal: round(subtotal),
-    tax: round(tax),
-    shipping: round(shipping),
-    discount: round(discount),
-    total: round(total),
+    tax,
+    shipping,
+    discount,
+    total,
   };
-}
-
-function round(n: number) {
-  return Math.round(n * 100) / 100;
 }
 
 export function applyCoupon(
